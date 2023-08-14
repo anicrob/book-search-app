@@ -5,6 +5,12 @@ const secret = 'mysecretsshhhhh';
 const expiration = '2h';
 
 module.exports = {
+  //authentication error
+  AuthenticationError: new GraphQLError('Could not authenticate user.', {
+    extensions: {
+      code: 'UNAUTHENTICATED',
+    },
+  }),
   // function for our authenticated routes
   authMiddleware: function (req, res, next) {
     // allows token to be sent via  req.query or headers
