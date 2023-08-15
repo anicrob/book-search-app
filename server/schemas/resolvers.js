@@ -44,14 +44,7 @@ const resolvers = {
             { _id: context.user._id },
             {
               $addToSet: {
-                savedBooks: {
-                  authors: authors,
-                  description: description,
-                  title: title,
-                  bookId: bookId,
-                  image: image,
-                  link: link,
-                },
+                savedBooks: bookData
               },
             },
             { new: true, runValidators: true }
