@@ -45,9 +45,9 @@ const resolvers = {
             {
               $addToSet: {
                 savedBooks: {
-                 authors: authors,
+                  authors: authors,
                   description: description,
-                 title: title,
+                  title: title,
                   bookId: bookId,
                   image: image,
                   link: link,
@@ -73,7 +73,7 @@ const resolvers = {
           if (!updatedUser) {
             return res.status(404).json({ message: "Couldn't find the user!" });
           }
-        return {updatedUser};
+          return { updatedUser };
         } catch (err) {
           console.log(err);
         }
