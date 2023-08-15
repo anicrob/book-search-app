@@ -45,21 +45,20 @@ const resolvers = {
             {
               $addToSet: {
                 savedBooks: {
-                  authors,
-                  description,
-                  title,
-                  bookId,
-                  image,
-                  link,
+                 authors: authors,
+                  description: description,
+                 title: title,
+                  bookId: bookId,
+                  image: image,
+                  link: link,
                 },
               },
             },
             { new: true, runValidators: true }
           );
-          return res.json(updatedUser);
+          return updatedUser;
         } catch (err) {
           console.log(err);
-          return res.status(400).json(err);
         }
       }
     },
@@ -74,10 +73,9 @@ const resolvers = {
           if (!updatedUser) {
             return res.status(404).json({ message: "Couldn't find the user!" });
           }
-          return res.json(updatedUser);
+        return {updatedUser};
         } catch (err) {
           console.log(err);
-          return res.status(400).json(err);
         }
       }
     },
