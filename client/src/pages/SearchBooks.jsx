@@ -139,7 +139,7 @@ const SearchBooks = () => {
                         disabled={savedBookIds?.some((savedBookId) => savedBookId === book?.bookId)}
                         className='btn-block btn-info'
                         onClick={() => handleSaveBook(book?.bookId)}>
-                        {savedBookIds?.some((savedBookId) => savedBookId === book?.bookId)
+                        {savedBookIds.some((savedBookId) => savedBookId === book.bookId)
                           ? 'This book has already been saved!'
                           : 'Save this Book!'}
                       </Button>
