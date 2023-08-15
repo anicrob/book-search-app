@@ -35,7 +35,7 @@ const resolvers = {
     },
     saveBook: async (
       parent,
-      { authors, description, title, bookId, image, link },
+      { bookData },
       context
     ) => {
       if (context.user) {
@@ -49,7 +49,7 @@ const resolvers = {
             },
             { new: true, runValidators: true }
           );
-          return updatedUser;
+          return {updatedUser};
         } catch (err) {
           console.log(err);
         }
