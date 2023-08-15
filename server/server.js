@@ -21,8 +21,9 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use("/graphql", expressMiddleware(server, { context: authMiddleware }));
-
+  app.use('/graphql', expressMiddleware(server, {
+    context: authMiddleware
+  }));
   // if we're in production, serve client/dist as static assets
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));
