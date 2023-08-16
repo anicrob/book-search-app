@@ -49,7 +49,7 @@ const resolvers = {
             },
             { new: true, runValidators: true }
           );
-          return {updatedUser};
+          return {...updatedUser};
         } catch (err) {
           console.log(err);
         }
@@ -66,7 +66,7 @@ const resolvers = {
           if (!updatedUser) {
             return res.status(404).json({ message: "Couldn't find the user!" });
           }
-          return { updatedUser };
+          return { ...updatedUser };
         } catch (err) {
           console.log(err);
         }
