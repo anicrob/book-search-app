@@ -16,16 +16,18 @@ import { removeBookId } from '../utils/localStorage';
 import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
+  //when a book is removed, does a refetch to show the new list of books the user has saved
   const [removeBook] = useMutation(REMOVE_BOOK, {refetchQueries: [
     QUERY_ME
   ]});
+  //queries for the the QUERY_ME query
+  //this allows for the books to show up without having to refresh page
   const { loading, data } = useQuery(QUERY_ME, { fetchPolicy: 'network-only' });
   const userData = data?.me || []
 
- console.log('Data>>', data);
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-
+    //get the token from local storage
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -33,6 +35,8 @@ const SavedBooks = () => {
     }
 
     try {
+      //remove the book (this is using the REMOVE_BOOK mutation)
+      //pass in the bookId as the variable
       await removeBook({variables: {bookId: bookId}});
       
       // upon success, remove book's id from localStorage

@@ -23,6 +23,7 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
+  //use the mutation, SAVE_BOOK to save a book
   const [saveBook] = useMutation(SAVE_BOOK);
 
   // create state to hold saved bookId values
@@ -44,14 +45,16 @@ const SearchBooks = () => {
     }
 
     try {
+      //search google books for the search text provided by user
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
+      //grab all of the items (books) from the response
       const { items } = await response.json();
-
+      //map through those items to create bookData object
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ['No author to display'],
@@ -59,9 +62,9 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
-
+      //set the state of searchedBooks to the bookData object
       setSearchedBooks(bookData);
-    
+      //clear the search input state
       setSearchInput('');
     } catch (err) {
       console.error(err);
@@ -79,9 +82,11 @@ const SearchBooks = () => {
       return false;
     }
     try {
+      //save the book using the SAVE_BOOK mutation by passing in the properties of the book to save (need spread operator to spread out properties)
         await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
+      //set the saved book Ids in local storage
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
       console.log('is anything happening?');
     } catch (err) {

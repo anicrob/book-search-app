@@ -24,6 +24,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
   
+  //this is the expressMiddleware with a context of the authMiddlware
   app.use('/graphql', expressMiddleware(server, {
     context: authMiddleware
   }));

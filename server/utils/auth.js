@@ -29,12 +29,14 @@ module.exports = {
     // verify token and get user data out of it
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      //set the req.user (user property on the request) to the user data/payload
+      //this will be considered the context.user in the resolvers
       req.user = data;
     } catch {
       console.log('Invalid token');
     }
 
-    // send to next endpoint
+    // return req (this will be called the context in the resolvers)
     return req;
   },
   signToken: function ({ username, email, _id }) {

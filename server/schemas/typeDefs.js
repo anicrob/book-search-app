@@ -23,6 +23,8 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+
+  #need an input to define the bookData
   input BookInput {
     authors: [String]
     description: String!
