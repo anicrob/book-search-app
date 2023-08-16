@@ -5,15 +5,15 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("savedBooks");
-      }
-      throw AuthenticationError;
+        const user = await User.findOne({ _id: context.user._id });
+        return user;
+      };
+      // throw AuthenticationError;
     },
   },
   Mutation: {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw AuthenticationError;
       }
@@ -39,6 +39,7 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
+        console.log('bookData>>>>', bookData);
         try {
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
@@ -49,7 +50,8 @@ const resolvers = {
             },
             { new: true, runValidators: true }
           );
-          return {...updatedUser};
+          console.log('updatedUser>>>>>', updatedUser)
+          return updatedUser;
         } catch (err) {
           console.log(err);
         }
@@ -66,7 +68,7 @@ const resolvers = {
           if (!updatedUser) {
             return res.status(404).json({ message: "Couldn't find the user!" });
           }
-          return { ...updatedUser };
+          return updatedUser;
         } catch (err) {
           console.log(err);
         }
