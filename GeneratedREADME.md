@@ -20,25 +20,8 @@ To be able to install the project, the following is needed to install packages a
 npm i
 ~~~
 
-## Usage
-
-n/a
-
-
-
 ## Contributing
 
-Starter code was provided by UNC Full Stack Coding Bootcamp where the app was completed as a RESTful application, so anicrob's job was to turn this into an app that uses graphql instead.
+Starter code was provided by UNC Full Stack Coding Bootcamp where the app was completed as a RESTful application, so anicrob's job was to turn this into an app that uses GraphQL instead with minor troubleshooting assistance from learning assistants at UNC.
 
-## Tests
-
-To run tests, run the following command:
-~~~
-n/a
-~~~
-
-## Questions
-
-If you have questions about the repo, open an issue or contact me directly at n/a. 
-
-You can find more of my work at [n/a](https://github.com/n/a).
+## Link
